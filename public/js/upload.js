@@ -24,6 +24,7 @@ $(document).ready(function() {
             success: function(response) {
             //TODO: We will fill this in later
                 if(response.error){
+                    console.log(response.error);
                     status('Something went wrong.');
                     return;
                 }

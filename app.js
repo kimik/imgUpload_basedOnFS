@@ -69,8 +69,8 @@ app.get('/', routes.index);
 
 app.post('/api/photos', function(req, res){
   //console.log(JSON.stringify(req.files));
-  var serverPath = '/images/' + req.files.userPhoto.name;
-  var pathToServer = 'C:/public';
+  var serverPath = './images/' + req.files.userPhoto.name;
+  var pathToServer = './public/';
 
   require('fs').rename(
     //userPhoto is the input name
@@ -78,7 +78,7 @@ app.post('/api/photos', function(req, res){
     pathToServer + serverPath,
     function(error){
       if(error){
-        console.log(error)
+        console.log('upErr:'+error);
         res.send({
           error: 'File uploaded cancelled, error.'
         });
@@ -99,7 +99,7 @@ app.post('/api/crop', function(req, res){
   var src = req.body.src;
   var name = req.body.name;
   var coords = req.body.data;
-  var pathToServer = 'C:/public/';
+  var pathToServer = './public/crop/';
 
   gm(pathToServer + src).crop(coords.w, coords.h, coords.x, coords.y).resize(resizeX,resizeY).write(pathToServer + 'images/cropped_' + name, function(err){
     if (!err){
